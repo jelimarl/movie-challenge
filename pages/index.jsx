@@ -2,6 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import { Inter } from 'next/font/google'
 import styles from '@/styles/Home.module.css'
+import Header from '@/components/header'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -119,9 +120,18 @@ export default function Home() {
         </div>
       </main> */}
 
-      <h1 className="text-3xl font-bold underline">
-        Movie Challenge!
-      </h1>
+      <Header></Header>
+      <main className='w-full h-screen bg-blue-900 px-5 flex flex-col space-y-10 items-center justify-center'>
+        <h1 className="text-3xl font-bold text-white">
+          Enjoy the best movies and series!
+        </h1>
+        <Image
+          src='/images/popcorn.png'
+          height={125}
+          width={125}
+          alt=""
+        />
+      </main>
     </>
   )
 }
