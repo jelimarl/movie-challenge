@@ -4,30 +4,44 @@ import { useState } from "react";
 import useSWR from "swr";
 
 export default function Series() {
-  const [option, setOption] = useState('')
+  const [option, setOption] = useState('love')
+  console.log(option)
 
   const urlAPI = "https://www.omdbapi.com/"
   const apiKey = "dec040b6"
 
   const { data, error, isLoading } = useSWR(`${urlAPI}?apikey=${apiKey}&type=series&s=${option}`, fetcher)
+  console.log(data)
 
   function handleChangeSelector(event) {
     const seriesType = event.target.value
     setOption(seriesType)
   }
 
-  console.log(option)
-  console.log(data)
-
   return (
-    <div>
+    <>
       <Header></Header>
-      <h1>Series</h1>
-      <select onChange={handleChangeSelector}>
-        <option>Choose</option>
-        <option value="love">Love</option>
-        <option value="christmas">Christmas</option>
-      </select>
-    </div>
+      <main className="w-full h-screen bg-blue-900 px-5 pt-5 flex flex-col space-y-5 items-center">
+        <select className="rounded-md p-1" onChange={handleChangeSelector}>
+          <option>Choose</option>
+          <option value="love">Love</option>
+          <option value="christmas">Christmas</option>
+        </select>
+
+        {
+          data !== undefined ?
+            <div>
+              {
+                data.map((element) => (
+                  <div key={element.imdbID}>
+                    <img src={element.Poster} alt="" />
+                  </div>
+                ))
+              }
+            </div>
+            : <div>Loading...</div>
+        }
+      </main>
+    </>
   )
 }
