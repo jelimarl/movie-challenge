@@ -1,7 +1,7 @@
 import Header from "@/components/header";
 import { fetcher } from "@/utils/petition";
 import { useState } from "react";
-import useSWR from 'swr'
+import useSWR from 'swr';
 
 export default function Movies() {
   const [option, setOption] = useState('love')
@@ -21,7 +21,7 @@ export default function Movies() {
   return (
     <>
       <Header></Header>
-      <main className="w-full h-screen bg-blue-900 px-5 pt-5 flex flex-col space-y-5 items-center">
+      <main className="w-full h-auto bg-blue-900 px-5 pt-20 flex flex-col space-y-6 items-center">
         <select className="rounded-md p-1" onChange={handleChangeSelector}>
           <option>Choose</option>
           <option value="love">Love</option>
@@ -30,11 +30,13 @@ export default function Movies() {
 
         {
           data !== undefined ?
-            <div>
+            <div className="flex flex-col space-y-6 pb-6">
               {
                 data.map((movie) => (
                   <div key={movie.imdbID}>
-                    <img src={movie.Poster} alt="" />
+                    <img className="rounded-t-md" src={movie.Poster} alt="" />
+
+                    <h3 className="pl-2 bg-neutral-100 rounded-b-md font-semibold">Year {movie.Year}</h3>
                   </div>
                 ))
               }
