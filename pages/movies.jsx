@@ -1,3 +1,4 @@
+import Card from "@/components/card";
 import Header from "@/components/header";
 import { fetcher } from "@/utils/petition";
 import { useState } from "react";
@@ -8,7 +9,7 @@ export default function Movies() {
   console.log(option)
 
   const urlAPI = "https://www.omdbapi.com/"
-  const apiKey = "f674b814"
+  const apiKey = "dec040b6"
 
   const { data, error, isLoading } = useSWR(`${urlAPI}?apikey=${apiKey}&type=movie&s=${option}`, fetcher)
   console.log(data)
@@ -32,12 +33,11 @@ export default function Movies() {
           data !== undefined ?
             <div className="flex flex-col space-y-6 pb-6">
               {
-                data.map((movie) => (
-                  <div key={movie.imdbID}>
-                    <img className="rounded-t-md" src={movie.Poster} alt="" />
-
-                    <h3 className="pl-2 bg-neutral-100 rounded-b-md font-semibold">Year {movie.Year}</h3>
-                  </div>
+                data.map((movie, index) => (
+                  <Card
+                    movie={movie}
+                    key={index}
+                  />
                 ))
               }
             </div>
