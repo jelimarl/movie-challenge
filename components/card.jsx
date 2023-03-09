@@ -1,6 +1,7 @@
 import { fetcherPlot } from "@/utils/petition";
 import { useState } from "react";
 import useSWR from 'swr';
+import Swal from 'sweetalert2'
 
 export default function Card(props) {
   const [id, setID] = useState('')
@@ -12,22 +13,26 @@ export default function Card(props) {
   const { data, error, isLoading } = useSWR(`${urlAPI}?apikey=${apiKey}&i=${id}&plot=short`, fetcherPlot)
   console.log(data)
 
-  return (
-    <section>
-      <div onClick={() => setID(props.movie.imdbID)}>
-        <img className="rounded-t-md" src={props.movie.Poster} alt="" />
+  function description() {
+    Swal.fire({
+      title: `${data.Title}<br>${data.Year}`,
+      text: `${data.Plot}`,
+      confirmButtonText: 'Back',
+    })
+  }
 
-        <h3 className="pl-2 bg-neutral-100 rounded-b-md font-semibold">Year {props.movie.Year}</h3>
+  return (
+    <>
+      <div onClick={() => setID(props.element.imdbID)}>
+        <img className="rounded-md " src={props.element.Poster} alt="" />
       </div>
       <>
         {
-          data !== undefined && data.imdbID === props.movie.imdbID ?
-            <div>
-              <h3>{data.Plot}</h3>
-            </div>
+          data !== undefined && data.imdbID === props.element.imdbID ?
+            description()
             : <div></div>
         }
       </>
-    </section>
+    </>
   )
 }

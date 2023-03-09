@@ -33,9 +33,9 @@ export default function Movies() {
           data !== undefined ?
             <div className="flex flex-col space-y-6 pb-6">
               {
-                data.map((movie, index) => (
+                data.map((element, index) => (
                   <Card
-                    movie={movie}
+                    element={element}
                     key={index}
                   />
                 ))

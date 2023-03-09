@@ -1,3 +1,4 @@
+import Card from "@/components/card";
 import Header from "@/components/header";
 import { fetcher } from "@/utils/petition";
 import { useState } from "react";
@@ -32,12 +33,11 @@ export default function Series() {
           data !== undefined ?
             <div className="flex flex-col space-y-6 pb-6">
               {
-                data.map((element) => (
-                  <div key={element.imdbID}>
-                    <img className="rounded-t-md" src={element.Poster} alt="" />
-
-                    <h3 className="pl-2 bg-neutral-100 rounded-b-md font-semibold">Year {element.Year}</h3>
-                  </div>
+                data.map((element, index) => (
+                  <Card
+                    element={element}
+                    key={index}
+                  />
                 ))
               }
             </div>
