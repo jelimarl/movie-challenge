@@ -1,4 +1,4 @@
-import { fetcherPlot } from "@/utils/petition";
+import { fetcherPlot } from "@/utils/petitions";
 import { useState } from "react";
 import useSWR from 'swr';
 import Swal from 'sweetalert2'

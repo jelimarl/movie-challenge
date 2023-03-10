@@ -1,6 +1,7 @@
 import Card from "@/components/card";
 import Header from "@/components/header";
-import { fetcher } from "@/utils/petition";
+import Pagination from "@/components/pagination";
+import { fetcher } from "@/utils/petitions";
 import { useState } from "react";
 import useSWR from 'swr';
 
@@ -8,15 +9,31 @@ export default function Movies() {
   const [option, setOption] = useState('love')
   console.log(option)
 
+  const [page, setPage] = useState(1)
+  console.log(page)
+
   const urlAPI = "https://www.omdbapi.com/"
   const apiKey = "dec040b6"
 
-  const { data, error, isLoading } = useSWR(`${urlAPI}?apikey=${apiKey}&type=movie&s=${option}`, fetcher)
+  const { data, error, isLoading } = useSWR(`${urlAPI}?apikey=${apiKey}&type=movie&s=${option}&page=${page}`, fetcher)
   console.log(data)
 
   function handleChangeSelector(event) {
     const movieType = event.target.value
     setOption(movieType)
+    setPage(1)
+  }
+
+  function handleClickBack() {
+    if (page >= 2) {
+      const newPage = page - 1
+      setPage(newPage)
+    }
+  }
+
+  function handleClickNext() {
+    const newPage = page + 1
+    setPage(newPage)
   }
 
   return (
@@ -31,7 +48,7 @@ export default function Movies() {
 
         {
           data !== undefined ?
-            <div className="flex flex-col space-y-6 pb-6">
+            <div className="flex flex-col space-y-4">
               {
                 data.map((element, index) => (
                   <Card
@@ -43,6 +60,12 @@ export default function Movies() {
             </div>
             : <div>Loading...</div>
         }
+
+        <Pagination
+          handleClickBack={handleClickBack}
+          handleClickNext={handleClickNext}
+          page={page}
+        />
       </main>
     </>
   )
