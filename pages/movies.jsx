@@ -48,7 +48,7 @@ export default function Movies() {
 
         {
           data !== undefined ?
-            <div className="flex flex-col space-y-4">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-3">
               {
                 data.map((element, index) => (
                   <Card

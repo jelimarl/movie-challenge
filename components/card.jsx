@@ -17,12 +17,12 @@ export default function Card(props) {
     Swal.fire({
       title: `${data.Title}<br>${data.Year}`,
       text: `${data.Plot}`,
-      confirmButtonText: 'Back',
+      confirmButtonText: 'Close',
     })
   }
 
   return (
-    <>
+    <div>
       <div onClick={() => setID(props.element.imdbID)}>
         <img className="rounded-md " src={props.element.Poster} alt="" />
       </div>
@@ -33,6 +33,6 @@ export default function Card(props) {
             : <div></div>
         }
       </>
-    </>
+    </div>
   )
 }
