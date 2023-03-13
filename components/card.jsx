@@ -1,7 +1,7 @@
 import { fetcherPlot } from "@/utils/petitions";
 import { useState } from "react";
 import useSWR from 'swr';
-import Swal from 'sweetalert2'
+import Swal from 'sweetalert2';
 
 export default function Card(props) {
   const [id, setID] = useState('')
@@ -16,7 +16,7 @@ export default function Card(props) {
   function description() {
     Swal.fire({
       title: `${data.Title}<br>${data.Year}`,
-      text: `${data.Plot}`,
+      text: `${data.Plot === 'N/A' ? '' : data.Plot}`,
       confirmButtonText: 'Close',
     })
   }
@@ -24,7 +24,11 @@ export default function Card(props) {
   return (
     <div>
       <div onClick={() => setID(props.element.imdbID)}>
-        <img className="rounded-md " src={props.element.Poster} alt="" />
+        {
+          props.element.Poster === 'N/A' ?
+            <img className="min-h-80 rounded-md" src='/images/no-image-icon.png' />
+            : <img className="rounded-md " src={props.element.Poster} alt="" />
+        }
       </div>
       <>
         {

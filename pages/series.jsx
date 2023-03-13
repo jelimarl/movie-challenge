@@ -42,7 +42,7 @@ export default function Series() {
       <main className="w-full h-auto bg-blue-900 px-5 pt-20 flex flex-col space-y-6 items-center">
         <select className="rounded-md p-1" onChange={handleChangeSelector}>
           <option>Choose</option>
-          <option value="love">Love</option>
+          <option value="love">Romance</option>
           <option value="christmas">Christmas</option>
         </select>
 
